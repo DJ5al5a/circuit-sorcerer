@@ -36,11 +36,9 @@ ssh -p ${NAS_PORT} ${NAS_USER}@${NAS_HOST} "mkdir -p ${NAS_PATH}"
 
 # Deploy files
 echo "📤 Uploading files to NAS..."
-rsync -avz --progress \
-    --delete \
-    -e "ssh -p ${NAS_PORT}" \
-    "${PROJECT_DIR}/out/" \
-    "${NAS_USER}@${NAS_HOST}:${NAS_PATH}/"
+cd "${PROJECT_DIR}/out"
+tar -czf - . | ssh -p ${NAS_PORT} ${NAS_USER}@${NAS_HOST} "cd ${NAS_PATH} && tar -xzf -"
+cd "${PROJECT_DIR}"
 
 echo ""
 echo "✅ Deployment complete!"

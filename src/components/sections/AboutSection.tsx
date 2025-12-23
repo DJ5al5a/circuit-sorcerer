@@ -236,6 +236,24 @@ export function AboutSection() {
                 </a>
               </div>
             </motion.div>
+
+            {/* Video Showcase */}
+            <motion.div variants={fadeInUp} className="space-y-4">
+              <h3 className="text-xl font-bold text-mystic-purple text-center">
+                In Action
+              </h3>
+              <div className="wizard-card overflow-hidden">
+                <video
+                  className="w-full rounded-lg"
+                  controls
+                  preload="metadata"
+                  poster="/circuitsorcerer.png"
+                >
+                  <source src="/grok-video-273983ef-4c07-45a9-81bc-deb06f55d93c.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </div>

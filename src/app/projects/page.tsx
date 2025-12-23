@@ -30,7 +30,17 @@ export default function ProjectsPage() {
       <main className="min-h-screen bg-void pt-24">
         {/* Hero Section */}
         <section className="relative overflow-hidden bg-circuit-grid py-20">
-          <div className="absolute inset-0 bg-mystic-radial opacity-50" />
+          <div className="absolute inset-0">
+            {/* Sorcerer Background */}
+            <div
+              className="absolute inset-0 bg-cover bg-center opacity-20"
+              style={{
+                backgroundImage: 'url(/sorcerer.jpeg)',
+                filter: 'brightness(0.5)'
+              }}
+            />
+            <div className="absolute inset-0 bg-mystic-radial opacity-50" />
+          </div>
 
           <div className="container relative z-10 mx-auto px-4">
             <motion.div

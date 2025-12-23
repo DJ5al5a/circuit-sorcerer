@@ -26,7 +26,7 @@ export function HeroSection() {
         <div
           className="absolute inset-0 bg-cover bg-center opacity-40"
           style={{
-            backgroundImage: 'url(/background2.jpeg)',
+            backgroundImage: 'url(/CS/background2.jpeg)',
             filter: 'brightness(0.7)'
           }}
         />
@@ -56,7 +56,7 @@ export function HeroSection() {
                 <div className="absolute -inset-1 animate-glow-pulse rounded-2xl bg-gradient-to-r from-electric-cyan via-mystic-purple to-arcane-gold opacity-75 blur-lg" />
                 <div className="relative h-48 w-48 overflow-hidden rounded-2xl border-4 border-electric-cyan bg-shadow md:h-56 md:w-56">
                   <Image
-                    src={siteConfig.author.avatar}
+                    src={`/CS${siteConfig.author.avatar}`}
                     alt={siteConfig.author.name}
                     fill
                     className="object-contain transition-transform duration-300 group-hover:scale-105"

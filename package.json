@@ -1,17 +1,31 @@
 {
   "name": "circuit-sorcerer",
   "version": "0.1.0",
-  "private": true,
+  "bin": {
+    "delegate": "./scripts/cli/delegate-wrapper.js"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "delegate": "tsx scripts/cli/delegate.ts",
+    "delegate:content": "npm run delegate -- content",
+    "delegate:research": "npm run delegate -- research",
+    "delegate:test": "npm run delegate -- test",
+    "gen:project-desc": "npm run delegate:content -- --type project-description",
+    "gen:blog": "npm run delegate:content -- --type blog-post"
   },
   "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.23.26",
+    "lucide-react": "^0.562.0",
     "next": "16.1.0",
+    "next-themes": "^0.4.6",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -21,6 +35,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.0",
     "tailwindcss": "^4",
+    "tsx": "^4.7.0",
     "typescript": "^5"
   }
 }

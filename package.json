@@ -1,20 +1,11 @@
 {
   "name": "circuit-sorcerer",
   "version": "0.1.0",
-  "bin": {
-    "delegate": "./scripts/cli/delegate-wrapper.js"
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "delegate": "tsx scripts/cli/delegate.ts",
-    "delegate:content": "npm run delegate -- content",
-    "delegate:research": "npm run delegate -- research",
-    "delegate:test": "npm run delegate -- test",
-    "gen:project-desc": "npm run delegate:content -- --type project-description",
-    "gen:blog": "npm run delegate:content -- --type blog-post"
+    "lint": "eslint"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

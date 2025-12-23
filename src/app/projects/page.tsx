@@ -35,7 +35,7 @@ export default function ProjectsPage() {
             <div
               className="absolute inset-0 bg-cover bg-center opacity-20"
               style={{
-                backgroundImage: 'url(/CS/sorcerer.jpeg)',
+                backgroundImage: 'url(/sorcerer.jpeg)',
                 filter: 'brightness(0.5)'
               }}
             />

@@ -33,7 +33,7 @@ export function AboutSection() {
         <div
           className="absolute inset-0 bg-cover bg-center opacity-25"
           style={{
-            backgroundImage: 'url(/CS/background.jpeg)',
+            backgroundImage: 'url(/background.jpeg)',
             filter: 'brightness(0.6)'
           }}
         />
@@ -45,7 +45,7 @@ export function AboutSection() {
         <div
           className="absolute -bottom-20 -right-20 h-96 w-96 opacity-10 hidden lg:block"
           style={{
-            backgroundImage: 'url(/CS/silgouette.jpeg)',
+            backgroundImage: 'url(/silgouette.jpeg)',
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'bottom right',
@@ -76,7 +76,7 @@ export function AboutSection() {
                 <div className="absolute -inset-4 bg-gradient-to-r from-electric-cyan via-circuit-green to-mystic-purple opacity-30 blur-xl rounded-full animate-glow-pulse" />
                 <div className="relative h-48 w-48 md:h-56 md:w-56">
                   <Image
-                    src="/CS/laptop_logo.jpeg"
+                    src="/laptop_logo.jpeg"
                     alt="Circuit Sorcerer Logo"
                     fill
                     className="object-contain drop-shadow-[0_0_30px_rgba(0,217,255,0.5)]"
@@ -247,9 +247,9 @@ export function AboutSection() {
                   className="w-full rounded-lg"
                   controls
                   preload="metadata"
-                  poster="/CS/circuitsorcerer.png"
+                  poster="/circuitsorcerer.png"
                 >
-                  <source src="/CS/grok-video-273983ef-4c07-45a9-81bc-deb06f55d93c.mp4" type="video/mp4" />
+                  <source src="/grok-video-273983ef-4c07-45a9-81bc-deb06f55d93c.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </div>

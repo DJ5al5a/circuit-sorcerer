@@ -42,7 +42,7 @@ export function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="container relative z-10 mx-auto flex min-h-screen flex-col items-center justify-center px-4 pt-24 pb-16">
+      <div className="container relative z-10 mx-auto flex min-h-screen flex-col items-center justify-center px-4 pb-16">
         {mounted && (
           <motion.div
             initial="hidden"

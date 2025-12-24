@@ -55,7 +55,7 @@ export function AboutSection() {
       </div>
 
       <div className="container relative z-10 mx-auto px-4 max-w-4xl">
-        {mounted && isInView && (
+         {mounted && (
           <motion.div
             initial="hidden"
             animate="visible"
@@ -64,9 +64,9 @@ export function AboutSection() {
           >
             {/* Section Title */}
             <motion.div variants={fadeInUp} className="text-center">
-              <h2 className="mb-6 font-display text-4xl font-bold text-electric-cyan md:text-5xl">
-                The Wizard's Codex
-              </h2>
+               <h2 className="mb-6 font-display text-4xl font-bold text-electric-cyan md:text-5xl">
+                 The Wizard&apos;s Codex
+               </h2>
               <div className="mx-auto h-1 w-24 bg-gradient-to-r from-electric-cyan via-arcane-gold to-circuit-green" />
             </motion.div>
 
@@ -153,7 +153,7 @@ export function AboutSection() {
                     <div className="h-2 overflow-hidden rounded-full bg-void">
                       <div
                         className={`h-full bg-gradient-to-r ${categoryColors[skill.category] || 'from-electric-cyan to-mystic-purple'} transition-all duration-1000`}
-                        style={{ width: isInView ? `${skill.level}%` : '0%' }}
+                        style={{ width: `${skill.level}%` }}
                       />
                     </div>
                     <div className="mt-1 text-xs text-text-muted capitalize">

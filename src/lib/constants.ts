@@ -75,7 +75,7 @@ export const NAV_ITEMS = [
   { name: 'Projects', href: '/projects' },
   { name: 'Resume', href: '/resume' },
   { name: 'Roadmap', href: '/roadmap' },
-  { name: 'Blog', href: '/blog' },
+  { name: 'Emby', href: '/emby' },
   { name: 'Support', href: '/support' },
   { name: 'Contact', href: '/contact' },
 ] as const

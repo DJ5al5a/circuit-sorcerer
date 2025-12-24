@@ -27,7 +27,8 @@ export default function ProjectsPage() {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen bg-void pt-24">
+      <div className="h-24"></div>
+      <main className="min-h-screen bg-void">
         {/* Hero Section */}
         <section className="relative overflow-hidden bg-circuit-grid py-20">
           <div className="absolute inset-0">

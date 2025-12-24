@@ -1,9 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
+  // API routes require dynamic rendering, cannot use static export
+  // output: 'export',
   images: {
-    unoptimized: true, // Required for static export
+    unoptimized: true,
   },
 };
 

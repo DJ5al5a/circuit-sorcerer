@@ -30,7 +30,7 @@ Personal portfolio website showcasing homelab infrastructure, security projects,
 - PostgreSQL database integration
 - Discord & Telegram notifications
 
-See [`backend/README.md`](./backend/README.md) for backend setup instructions.
+**Backend Workflows:** https://github.com/DJ5al5a/n8n-workflows
 
 ## Development
 

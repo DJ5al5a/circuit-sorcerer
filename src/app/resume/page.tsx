@@ -12,8 +12,18 @@ export default function ResumePage() {
     <>
       <Navigation />
       <div className="h-24"></div>
-      <main className="min-h-screen bg-void">
-        <div className="container mx-auto px-4 py-16">
+      <main className="min-h-screen relative flex justify-center">
+        {/* Background Image */}
+        <div
+          className="fixed inset-0 bg-cover bg-center opacity-30 -z-10"
+          style={{
+            backgroundImage: 'url(/sorcerer.jpeg)',
+            filter: 'brightness(0.4)'
+          }}
+        />
+        <div className="fixed inset-0 bg-background/80 -z-10" />
+
+        <div className="w-full container max-w-7xl mx-auto px-4 py-16">
           <motion.h1
             className="mb-8 font-display text-5xl font-bold text-electric-cyan text-glow-cyan md:text-7xl"
             initial="hidden"

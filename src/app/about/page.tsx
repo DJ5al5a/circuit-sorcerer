@@ -14,8 +14,18 @@ export default function AboutPage() {
     <>
       <Navigation />
       <div className="h-24"></div>
-      <main className="min-h-screen bg-void">
-        <div className="container mx-auto px-4 py-16">
+      <main className="min-h-screen relative flex justify-center">
+        {/* Background Image */}
+        <div
+          className="fixed inset-0 bg-cover bg-center opacity-30 -z-10"
+          style={{
+            backgroundImage: 'url(/sorcerer.jpeg)',
+            filter: 'brightness(0.4)'
+          }}
+        />
+        <div className="fixed inset-0 bg-background/80 -z-10" />
+
+        <div className="w-full container max-w-7xl mx-auto px-4 py-16">
           <motion.h1
             className="mb-8 font-display text-5xl font-bold text-electric-cyan text-glow-cyan md:text-7xl"
             initial="hidden"
@@ -87,52 +97,59 @@ export default function AboutPage() {
               variants={fadeInUp}
             >
               <h3 className="font-display text-2xl font-bold text-electric-cyan mb-6 text-center">
-                Arcane Abilities
+                Technical Skills
               </h3>
-              <p className="text-sm text-text-muted text-center uppercase tracking-wide mb-6">
-                Mastery across {skills.length} mystical arts
-              </p>
-              <motion.div
-                className="grid grid-cols-1 md:grid-cols-2 gap-4"
-                variants={staggerFast}
-                initial="hidden"
-                animate="visible"
-              >
-                {skills.map((skill) => (
-                  <div
-                    key={skill.name}
-                    className="wizard-card p-4"
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-medium text-text-primary">{skill.name}</span>
-                      <span className={`text-sm font-semibold ${
-                        skill.category === 'languages' ? 'text-electric-cyan' :
-                        skill.category === 'frameworks' ? 'text-mystic-purple' :
-                        skill.category === 'infrastructure' ? 'text-circuit-green' :
-                        skill.category === 'security' ? 'text-energy-red' :
-                        'text-arcane-gold'
-                      }`}>
-                        {skill.level}%
-                      </span>
-                    </div>
-                    <div className="h-2 overflow-hidden rounded-full bg-void">
-                      <div
-                        className={`h-full bg-gradient-to-r transition-all duration-1000 ${
-                          skill.category === 'languages' ? 'from-electric-cyan to-neon-blue' :
-                          skill.category === 'frameworks' ? 'from-mystic-purple to-electric-cyan' :
-                          skill.category === 'infrastructure' ? 'from-circuit-green to-electric-cyan' :
-                          skill.category === 'security' ? 'from-energy-red to-crimson-spark' :
-                          'from-mystic-purple to-arcane-gold'
-                        }`}
-                        style={{ width: `${skill.level}%` }}
-                      />
-                    </div>
-                    <div className="mt-1 text-xs text-text-muted capitalize">
-                      {skill.category.replace('-', ' ')}
-                    </div>
-                  </div>
-                ))}
-              </motion.div>
+
+              {/* Infrastructure Skills */}
+              <div className="mb-6">
+                <h4 className="text-sm font-semibold text-circuit-green mb-3 uppercase tracking-wide">
+                  Infrastructure & Self-Hosting
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {skills.filter(s => s.category === 'infrastructure').map((skill) => (
+                    <span
+                      key={skill.name}
+                      className="px-4 py-2 rounded-full bg-circuit-green/10 border border-circuit-green/30 text-circuit-green text-sm font-medium hover:bg-circuit-green/20 transition-colors"
+                    >
+                      {skill.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Security Skills */}
+              <div className="mb-6">
+                <h4 className="text-sm font-semibold text-energy-red mb-3 uppercase tracking-wide">
+                  Security & Penetration Testing
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {skills.filter(s => s.category === 'security').map((skill) => (
+                    <span
+                      key={skill.name}
+                      className="px-4 py-2 rounded-full bg-energy-red/10 border border-energy-red/30 text-energy-red text-sm font-medium hover:bg-energy-red/20 transition-colors"
+                    >
+                      {skill.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* AI Skills */}
+              <div>
+                <h4 className="text-sm font-semibold text-mystic-purple mb-3 uppercase tracking-wide">
+                  AI & Automation
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {skills.filter(s => s.category === 'ai').map((skill) => (
+                    <span
+                      key={skill.name}
+                      className="px-4 py-2 rounded-full bg-mystic-purple/10 border border-mystic-purple/30 text-mystic-purple text-sm font-medium hover:bg-mystic-purple/20 transition-colors"
+                    >
+                      {skill.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </motion.div>
 
             {/* Certifications */}
@@ -141,7 +158,7 @@ export default function AboutPage() {
               variants={fadeInUp}
             >
               <h3 className="font-display text-2xl font-bold text-mystic-purple mb-6 text-center">
-                Certifications & Quests
+                Certifications & Training
               </h3>
               <motion.div
                 className="space-y-3"
@@ -172,7 +189,7 @@ export default function AboutPage() {
                         ? '✓ Completed'
                         : cert.status === 'in-progress'
                           ? '⏳ In Progress'
-                          : '📜 Quest'
+                          : '🎯 Planned'
                       }
                     </div>
                   </motion.div>

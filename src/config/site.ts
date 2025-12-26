@@ -12,25 +12,26 @@ export const siteConfig = {
 
   author: {
     name: 'Circuit Sorcerer',
+    realName: 'Mike',
     title: 'Infrastructure Engineer & Security Enthusiast',
     bio: 'Self-taught technology enthusiast specializing in AI prompting, self-hosted infrastructure, and cybersecurity. Passionate about building and automating systems to reduce costs.',
     bioExtended: 'I am passionate about building robust, self-hosted infrastructure that prioritizes privacy, security, and complete control. From containerized applications to network security, I love exploring the full stack of modern DevOps and cybersecurity practices.',
     avatar: '/sorcerer.jpeg',
-    email: 'contact@circuitsorcerer.us.kg',
-    discord: 'circuitsorcerer#0000',
+    email: 'mjm.itguy@gmail.com',
+    emailSecondary: 'contact@circuitsorcerer.us.kg',
+    discord: 'bobthebum45',
 
     // Social Links
     social: {
-      github: 'https://github.com/circuitsorcerer',
-      linkedin: 'https://linkedin.com/in/circuitsorcerer',
-      twitter: 'https://x.com/circuitsorcerer',
+      github: 'https://github.com/DJ5al5a',
+      discord: 'bobthebum45',
     },
 
     // Platform Links
     platforms: {
       tryhackme: {
-        url: 'https://tryhackme.com/p/YOUR_USERNAME',
-        publicId: 'YOUR_PUBLIC_ID', // For iframe embed
+        url: 'https://tryhackme.com/p/bobthebum21',
+        publicId: 'bobthebum21', // For iframe embed
       },
       hackthebox: {
         url: 'https://app.hackthebox.com/profile/YOUR_ID',

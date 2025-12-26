@@ -1,119 +1,127 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
-import { Menu, X, Zap } from 'lucide-react'
-import { siteConfig } from '@/config/site'
-import { ThemeToggle } from '@/components/custom/ThemeToggle'
-import { cn } from '@/lib/utils'
+import Link from 'next/link'
+import { Menu, X, Cpu } from 'lucide-react'
 
 export function Navigation() {
-  const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
+      setIsScrolled(window.scrollY > 50)
     }
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setIsMobileMenuOpen(false)
-  }, [pathname])
+  const navLinks = [
+    { name: 'About', href: '/about' },
+    { name: 'Experience', href: '/#experience' },
+    { name: 'Projects', href: '/projects' },
+    { name: 'Contact', href: '/contact' },
+  ]
+
+  const externalLinks = [
+    { name: 'Roadmap', href: '/roadmap' },
+    { name: 'Emby', href: '/emby' },
+    { name: 'Support', href: '/support' },
+  ]
 
   return (
-    <header
-      className={cn(
-        'fixed top-0 z-50 w-full transition-all duration-300',
-        isScrolled ? 'glass-morph py-3' : 'glass-morph py-4'
-      )}
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-background/95 backdrop-blur-md shadow-md border-b border-border'
+          : 'bg-background/90 backdrop-blur-sm border-b border-border/50'
+      }`}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
+      <div className="container mx-auto">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          {/* Logo/Name */}
           <Link
             href="/"
-            className="group flex items-center gap-2 font-display text-xl font-bold transition-all md:text-2xl"
+            className="flex items-center gap-2 hover:text-primary transition-colors"
           >
-            <Zap className="h-6 w-6 text-lightning animate-glow-pulse" />
-            <span className="text-electric-cyan text-glow-cyan group-hover:text-arcane-gold group-hover:text-glow-gold">
-              CIRCUIT SORCERER
-            </span>
+            <Cpu size={28} className="text-primary" />
+            <span className="text-lg font-bold text-text-primary hidden md:block">Circuit Sorcerer</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden items-center gap-6 md:flex">
-            {siteConfig.nav.map((item) => {
-              const isActive = pathname === item.href
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    'relative py-2 font-medium transition-all',
-                    isActive
-                      ? 'text-arcane-gold text-glow-gold'
-                      : 'text-text-secondary hover:text-electric-cyan'
-                  )}
-                >
-                  {item.name}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-0 h-0.5 w-full bg-arcane-gold shadow-[0_0_8px_rgba(255,215,0,0.8)]" />
-                  )}
-                </Link>
-              )
-            })}
-          </nav>
-
-          {/* Theme Toggle & Mobile Menu Button */}
-          <div className="flex items-center gap-4">
-            <ThemeToggle />
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="rounded-lg border-2 border-electric-cyan/30 bg-abyss p-2 transition-all hover:border-arcane-gold md:hidden hover-glow-gold"
-              aria-label="Toggle mobile menu"
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-sm font-medium text-text-secondary hover:text-primary transition-colors link-underline"
+              >
+                {link.name}
+              </Link>
+            ))}
+            {externalLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-sm font-medium text-text-secondary hover:text-primary transition-colors link-underline"
+              >
+                {link.name}
+              </Link>
+            ))}
+            <Link
+              href="/resume"
+              className="btn btn-outline text-sm"
             >
-              {isMobileMenuOpen ? (
-                <X className="h-6 w-6 text-crimson-spark" />
-              ) : (
-                <Menu className="h-6 w-6 text-electric-cyan" />
-              )}
-            </button>
+              My Accomplishments
+            </Link>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 hover:text-primary transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <nav className="mt-4 flex flex-col gap-2 rounded-lg border border-electric-cyan/20 bg-shadow/95 p-4 backdrop-blur-lg md:hidden">
-            {siteConfig.nav.map((item) => {
-              const isActive = pathname === item.href
-              return (
+          <div className="md:hidden bg-background border-t border-border">
+            <div className="flex flex-col py-4 space-y-4">
+              {navLinks.map((link) => (
                 <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    'rounded-lg px-4 py-3 font-medium transition-all',
-                    isActive
-                      ? 'bg-arcane-gold/10 text-arcane-gold border border-arcane-gold/30'
-                      : 'text-text-secondary hover:bg-electric-cyan/10 hover:text-electric-cyan'
-                  )}
+                  key={link.name}
+                  href={link.href}
+                  className="text-sm font-medium text-text-secondary hover:text-primary transition-colors px-4"
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {item.name}
+                  {link.name}
                 </Link>
-              )
-            })}
-          </nav>
+              ))}
+              {externalLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="text-sm font-medium text-text-secondary hover:text-primary transition-colors px-4"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <Link
+                href="/resume"
+                className="mx-4 btn btn-outline text-sm text-center"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                My Accomplishments
+              </Link>
+            </div>
+          </div>
         )}
       </div>
-    </header>
+    </nav>
   )
 }

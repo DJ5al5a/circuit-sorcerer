@@ -1,21 +1,14 @@
 import type { Metadata } from 'next'
-import { Inter, Orbitron } from 'next/font/google'
-import { ThemeProvider } from 'next-themes'
+import { Inter } from 'next/font/google'
 import { siteConfig } from '@/config/site'
 import './globals.css'
 
-// Font configurations
+// Font configuration - Inter for clean, professional typography
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
-})
-
-const orbitron = Orbitron({
-  subsets: ['latin'],
-  variable: '--font-orbitron',
-  display: 'swap',
-  weight: ['400', '500', '600', '700', '800', '900'],
+  weight: ['400', '500', '600', '700'],
 })
 
 // Metadata
@@ -78,11 +71,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="dark">
-      <body className={`${inter.variable} ${orbitron.variable} font-sans`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          {children}
-        </ThemeProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.variable} font-sans antialiased`}>
+        {children}
       </body>
     </html>
   )

@@ -28,22 +28,20 @@ export default function ProjectsPage() {
     <>
       <Navigation />
       <div className="h-24"></div>
-      <main className="min-h-screen bg-void">
+      <main className="min-h-screen relative flex justify-center">
+        {/* Background Image */}
+        <div
+          className="fixed inset-0 bg-cover bg-center opacity-30 -z-10"
+          style={{
+            backgroundImage: 'url(/sorcerer.jpeg)',
+            filter: 'brightness(0.4)'
+          }}
+        />
+        <div className="fixed inset-0 bg-background/80 -z-10" />
+        <div className="w-full">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-circuit-grid py-20">
-          <div className="absolute inset-0">
-            {/* Sorcerer Background */}
-            <div
-              className="absolute inset-0 bg-cover bg-center opacity-20"
-              style={{
-                backgroundImage: 'url(/sorcerer.jpeg)',
-                filter: 'brightness(0.5)'
-              }}
-            />
-            <div className="absolute inset-0 bg-mystic-radial opacity-50" />
-          </div>
-
-          <div className="container relative z-10 mx-auto px-4">
+        <section className="relative overflow-hidden py-20">
+          <div className="container max-w-7xl relative z-10 mx-auto px-4">
             <motion.div
               initial="hidden"
               animate="visible"
@@ -63,7 +61,7 @@ export default function ProjectsPage() {
 
         {/* Filters */}
         <section className="border-b border-electric-cyan/20 bg-shadow py-8">
-          <div className="container mx-auto px-4">
+          <div className="container max-w-7xl mx-auto px-4">
             <div className="flex flex-wrap justify-center gap-3">
               {categories.map((category) => (
                 <button
@@ -89,7 +87,7 @@ export default function ProjectsPage() {
 
         {/* Projects Grid */}
         <section className="bg-shadow py-16">
-          <div className="container mx-auto px-4">
+          <div className="container max-w-7xl mx-auto px-4">
             <motion.div
               key={selectedCategory}
               initial="hidden"
@@ -112,6 +110,7 @@ export default function ProjectsPage() {
             )}
           </div>
         </section>
+        </div>
       </main>
       <Footer />
     </>

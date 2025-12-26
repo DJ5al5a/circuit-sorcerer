@@ -1,361 +1,319 @@
 @import "tailwindcss";
 
-/* Circuit Sorcerer Theme - Tech-Magic Fusion */
+/* Circuit Sorcerer - Tech Command Center Design */
+/* Original custom design - Tech/Industrial aesthetic */
 
-/* CSS Variables for Theme - Circuit Sorcerer (Darker Mystical) */
 :root {
-  /* Backgrounds - Darker, more mysterious */
-  --void: #050810;
-  --shadow: #0d1117;
-  --abyss: #161b22;
+  /* Tech/Industrial Dark Palette */
+  --background: #0a0a0a;
+  --surface: #111111;
+  --surface-elevated: #1a1a1a;
+  --surface-hover: #222222;
 
-  /* Primary - Tech Circuit colors (cooler, blue-teal) */
-  --electric-cyan: #00d9ff;
-  --circuit-green: #0aff0a;
-  --neon-blue: #0099ff;
+  /* Text - High Contrast for Readability */
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-tertiary: #808080;
+  --text-muted: #606060;
 
-  /* Sorcerer - Mystical colors (darker, more mysterious) */
-  --arcane-gold: #ffaa00;
-  --mystic-purple: #6b2fb5;
-  --void-violet: #4a148c;
-  --plasma-magenta: #e91e63;
+  /* Tech Colors - Electric Blue */
+  --primary: #00d4ff;
+  --primary-hover: #33ddff;
+  --primary-glow: #0088cc;
+  --primary-light: #1a1a2e;
 
-  /* Power - Energy & Accents */
-  --lightning: #00ff41;
-  --spark-white: #ffffff;
-  --energy-red: #ff3d00;
+  /* Accent - Amber/Gold (Warning Lights) */
+  --accent: #ffaa00;
+  --accent-hover: #ffbb33;
+  --accent-light: #2e2416;
 
-  /* Danger/Alert */
-  --crimson-spark: #ff5722;
+  /* Status Colors */
+  --success: #00ff88;
+  --warning: #ff8800;
+  --error: #ff4444;
+  --danger: #ff4444;
 
-  /* Text colors - slightly cooler */
-  --text-primary: #d6dce5;
-  --text-secondary: #7d8590;
-  --text-muted: #4d5761;
+  /* Borders & Dividers - Steel Gray */
+  --border: #2a2a2a;
+  --border-bright: #3a3a3a;
+  --border-hover: #4a4a4a;
 
-  /* For shadcn/ui compatibility */
-  --background: var(--void);
-  --foreground: var(--text-primary);
-  --primary: var(--electric-cyan);
-  --primary-foreground: var(--void);
-}
+  /* Glow Effects */
+  --glow-blue: 0 0 20px rgba(0, 212, 255, 0.3);
+  --glow-amber: 0 0 20px rgba(255, 170, 0, 0.3);
+  --glow-green: 0 0 10px rgba(0, 255, 136, 0.5);
 
-/* Light Mode - "Daylight Sorcery" variant */
-.light {
-  --void: #f5f7fa;
-  --shadow: #e8ecf1;
-  --abyss: #dce1e8;
+  /* Shadows - Darker for depth */
+  --shadow-sm: 0 2px 4px 0 rgb(0 0 0 / 0.5);
+  --shadow: 0 4px 6px 0 rgb(0 0 0 / 0.6);
+  --shadow-md: 0 6px 12px 0 rgb(0 0 0 / 0.7);
+  --shadow-lg: 0 10px 20px 0 rgb(0 0 0 / 0.8);
 
-  --electric-cyan: #0099cc;
-  --circuit-green: #28a745;
-  --neon-blue: #0066cc;
+  /* Typography */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Fira Code", "JetBrains Mono", monospace;
 
-  --arcane-gold: #cc9900;
-  --mystic-purple: #6b00b3;
-  --void-violet: #5a0c9d;
-  --plasma-magenta: #cc0088;
-
-  --lightning: #ffcc00;
-  --crimson-spark: #cc1133;
-
-  --text-primary: #1a1f2e;
-  --text-secondary: #5a6270;
-  --text-muted: #8b95a8;
-
-  --background: var(--void);
-  --foreground: var(--text-primary);
+  /* Spacing */
+  --spacing-section: 4rem;
+  --spacing-section-mobile: 2rem;
 }
 
 /* Tailwind v4 Theme Configuration */
 @theme inline {
-  /* Custom Colors */
-  --color-void: var(--void);
-  --color-shadow: var(--shadow);
-  --color-abyss: var(--abyss);
-
-  --color-electric-cyan: var(--electric-cyan);
-  --color-circuit-green: var(--circuit-green);
-  --color-neon-blue: var(--neon-blue);
-
-  --color-arcane-gold: var(--arcane-gold);
-  --color-mystic-purple: var(--mystic-purple);
-  --color-void-violet: var(--void-violet);
-  --color-plasma-magenta: var(--plasma-magenta);
-
-  --color-lightning: var(--lightning);
-  --color-spark-white: var(--spark-white);
-  --color-energy-red: var(--energy-red);
-  --color-crimson-spark: var(--crimson-spark);
+  /* Colors */
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-hover: var(--surface-hover);
 
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
   --color-text-muted: var(--text-muted);
 
-  /* shadcn/ui colors */
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-glow: var(--primary-glow);
+  --color-primary-light: var(--primary-light);
 
-  /* Custom Box Shadows - Subtle Mystical Glow Effects */
-  --shadow-glow-cyan: 0 0 15px rgb(0 217 255 / 0.4), 0 0 30px rgb(0 217 255 / 0.2);
-  --shadow-glow-green: 0 0 15px rgb(10 255 10 / 0.5), 0 0 30px rgb(10 255 10 / 0.3);
-  --shadow-glow-gold: 0 0 15px rgb(255 170 0 / 0.5), 0 0 30px rgb(255 170 0 / 0.3);
-  --shadow-glow-purple: 0 0 15px rgb(107 47 181 / 0.4), 0 0 30px rgb(107 47 181 / 0.25);
-  --shadow-glow-magenta: 0 0 15px rgb(233 30 99 / 0.4), 0 0 30px rgb(233 30 99 / 0.25);
-  --shadow-glow-lightning: 0 0 20px rgb(0 255 65 / 0.6), 0 0 40px rgb(0 255 65 / 0.3);
-  --shadow-glow-crimson: 0 0 15px rgb(255 61 0 / 0.5), 0 0 30px rgb(255 61 0 / 0.3);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-light: var(--accent-light);
 
-  /* Fonts */
-  --font-sans: Inter, system-ui, sans-serif;
-  --font-display: Orbitron, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --color-border: var(--border);
+  --color-border-bright: var(--border-bright);
+  --color-border-hover: var(--border-hover);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-danger: var(--danger);
+
+  /* Typography */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
 }
 
-/* Custom Animations */
-@keyframes glow-pulse {
+/* Tech Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
   0%, 100% {
-    opacity: 0.7;
-    filter: drop-shadow(0 0 6px currentColor);
+    opacity: 1;
   }
   50% {
-    opacity: 0.9;
-    filter: drop-shadow(0 0 14px currentColor);
+    opacity: 0.6;
   }
 }
 
-@keyframes glitch {
+@keyframes glow {
   0%, 100% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    transform: translate(-2px, -2px);
-  }
-  60% {
-    transform: translate(2px, 2px);
-  }
-  80% {
-    transform: translate(2px, -2px);
-  }
-}
-
-@keyframes scan {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(100vh);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
+    box-shadow: 0 0 5px var(--primary);
   }
   50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes charge {
-  0% {
-    box-shadow: 0 0 5px var(--electric-cyan);
-  }
-  50% {
-    box-shadow: 0 0 25px var(--arcane-gold), 0 0 50px var(--arcane-gold);
-  }
-  100% {
-    box-shadow: 0 0 35px var(--lightning), 0 0 70px var(--lightning);
-  }
-}
-
-@keyframes arcane-shimmer {
-  0%, 100% {
-    text-shadow: 0 0 10px var(--mystic-purple);
-  }
-  50% {
-    text-shadow: 0 0 20px var(--arcane-gold), 0 0 30px var(--arcane-gold);
-  }
-}
-
-@keyframes border-beam {
-  0% {
-    offset-distance: 0%;
-  }
-  100% {
-    offset-distance: 100%;
-  }
-}
-
-@keyframes gradient-shift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
+    box-shadow: 0 0 20px var(--primary), 0 0 30px var(--primary-glow);
   }
 }
 
 /* Utility Classes */
 @layer utilities {
-  /* Mystical Text Glow - Subtle */
-  .text-neon-glow {
-    text-shadow: 0 0 8px currentColor, 0 0 16px currentColor;
-  }
-
-  .text-glow-cyan {
-    text-shadow: 0 0 8px var(--electric-cyan), 0 0 16px rgb(0 217 255 / 0.5);
-  }
-
-  .text-glow-gold {
-    text-shadow: 0 0 8px var(--arcane-gold), 0 0 16px rgb(255 170 0 / 0.5);
-  }
-
-  .text-glow-purple {
-    text-shadow: 0 0 8px var(--mystic-purple), 0 0 16px rgb(107 47 181 / 0.5);
-  }
-
-  .text-glow-green {
-    text-shadow: 0 0 8px var(--circuit-green), 0 0 16px rgb(10 255 10 / 0.5);
-  }
-
-  /* Mystical Borders - DND Tech Wizard Style */
-  .border-mystical {
-    border-color: var(--electric-cyan);
-    box-shadow: 0 0 4px rgb(0 217 255 / 0.3);
-  }
-
-  .border-arcane {
-    border-color: var(--arcane-gold);
-    box-shadow: 0 0 6px rgb(255 170 0 / 0.4);
-  }
-
-  .border-energy {
-    border-color: var(--circuit-green);
-    box-shadow: 0 0 5px rgb(10 255 10 / 0.35);
-  }
-
-  /* Background Patterns - Darker, More Mystical */
-  .bg-circuit-grid {
-    background-image:
-      linear-gradient(to right, rgb(0 217 255 / 0.06) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(0 217 255 / 0.06) 1px, transparent 1px);
-    background-size: 50px 50px;
-  }
-
-  .bg-mystic-radial {
-    background-image: radial-gradient(circle at center, rgb(107 47 181 / 0.12) 0%, transparent 70%);
-  }
-
-  .bg-lightning-burst {
-    background-image: radial-gradient(ellipse at center, rgb(0 255 65 / 0.15) 0%, transparent 60%);
-  }
-
-  .bg-arcane-glow {
-    background-image: radial-gradient(circle at top right, rgb(255 170 0 / 0.08), transparent 50%);
-  }
-
-  .bg-gradient-cyber {
-    background: linear-gradient(90deg, var(--electric-cyan), var(--circuit-green), var(--mystic-purple));
-    background-size: 200% 200%;
-    animation: gradient-shift 3s ease infinite;
-  }
-
-  /* Glass Morphism - Darker, More Mysterious */
-  .glass-morph {
-    background: rgb(5 8 16 / 0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgb(0 217 255 / 0.15);
-  }
-
-  /* Wizard Card Style - Mystical Tech */
-  .wizard-card {
-    background: linear-gradient(135deg, rgb(13 17 23 / 0.9), rgb(22 27 34 / 0.8));
-    border: 1px solid rgb(107 47 181 / 0.2);
-    border-radius: 12px;
+  /* Dashboard Card - Core Component */
+  .dashboard-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
     transition: all 0.3s ease;
   }
 
-  .wizard-card:hover {
-    background: linear-gradient(135deg, rgb(22 27 34 / 0.95), rgb(13 17 23 / 0.85));
-    border-color: rgb(107 47 181 / 0.35);
+  .dashboard-card:hover {
+    border-color: var(--primary);
+    box-shadow: var(--glow-blue);
     transform: translateY(-2px);
   }
 
-  /* Spell Circle Effect */
-  .spell-circle {
-    position: relative;
+  /* Circuit Pattern Background */
+  .circuit-bg {
+    background-color: var(--background);
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 50px 50px;
   }
 
-  .spell-circle::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: inherit;
-    padding: 2px;
-    background: linear-gradient(45deg, var(--electric-cyan), var(--circuit-green), var(--mystic-purple), var(--arcane-gold));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0.3;
+  /* Tech Label - Terminal Style */
+  .tech-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+    display: block;
   }
 
-  /* Animation Classes */
-  .animate-glow-pulse {
-    animation: glow-pulse 2s ease-in-out infinite;
+  /* Status Indicator Dot */
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: var(--glow-green);
+    animation: pulse 2s infinite;
   }
 
-  .animate-glitch {
-    animation: glitch 0.5s ease-in-out;
-  }
-
-  .animate-scan {
-    animation: scan 8s linear infinite;
-  }
-
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
-  }
-
-  .animate-charge {
-    animation: charge 1.5s ease-in-out;
-  }
-
-  .animate-arcane-shimmer {
-    animation: arcane-shimmer 2s ease-in-out infinite;
-  }
-
-  /* Hover Effects */
+  /* Professional Hover Effect */
   .hover-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   .hover-lift:hover {
-    transform: translateY(-4px) scale(1.02);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
   }
 
-  .hover-glow-cyan:hover {
-    box-shadow: var(--shadow-glow-cyan);
+  /* Smooth Link Underline */
+  .link-underline {
+    position: relative;
+    text-decoration: none;
   }
 
-  .hover-glow-gold:hover {
-    box-shadow: var(--shadow-glow-gold);
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--primary);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
   }
 
-  .hover-glow-purple:hover {
-    box-shadow: var(--shadow-glow-purple);
+  .link-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
   }
 
-  .hover-glow-green:hover {
-    box-shadow: var(--shadow-glow-green);
+  /* Card Styles */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: all 0.2s ease;
   }
 
-  .hover-glow-crimson:hover {
-    box-shadow: var(--shadow-glow-crimson);
+  .card:hover {
+    border-color: var(--border-bright);
+    box-shadow: var(--shadow);
+  }
+
+  /* Glass Effect - Dark Industrial */
+  .glass {
+    background: rgb(17 17 17 / 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+  }
+
+  /* Section Spacing */
+  .section-padding {
+    padding-top: var(--spacing-section);
+    padding-bottom: var(--spacing-section);
+  }
+
+  @media (max-width: 768px) {
+    .section-padding {
+      padding-top: var(--spacing-section-mobile);
+      padding-bottom: var(--spacing-section-mobile);
+    }
+  }
+
+  /* Animations */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.6s ease-out;
+  }
+
+  /* Text Gradient - Tech Style */
+  .text-gradient {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Tag/Badge - Tech Style */
+  .tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    font-family: var(--font-mono);
+    border-radius: 4px;
+    background: var(--surface-elevated);
+    color: var(--primary);
+    border: 1px solid var(--border);
+  }
+
+  /* Button Base */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background: var(--primary);
+    color: var(--background);
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background: var(--primary-hover);
+    box-shadow: var(--glow-blue);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+  }
+
+  .btn-outline:hover {
+    background: var(--primary-light);
+    box-shadow: var(--glow-blue);
   }
 }
 
@@ -368,68 +326,105 @@
 
 html {
   scroll-behavior: smooth;
-  width: 100%;
+  font-size: 16px;
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
+  color: var(--text-primary);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
   overflow-x: hidden;
-  width: 100%;
-  margin: 0 auto;
 }
 
-/* Ensure all main containers are centered */
-main {
-  width: 100%;
-  margin: 0 auto;
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: 0.5em;
 }
 
-/* Override container to ensure centering */
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+p {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+/* Container */
 .container {
   width: 100%;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
-/* Scrollbar Styling */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Scrollbar Styling - Tech Theme */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--shadow);
+  background: var(--surface);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--electric-cyan);
-  border-radius: 5px;
+  background: var(--primary);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--arcane-gold);
+  background: var(--primary-hover);
 }
 
-/* Selection Styling */
+/* Selection Styling - Tech Theme */
 ::selection {
-  background: rgb(0 255 255 / 0.3);
-  color: var(--spark-white);
+  background: var(--primary-glow);
+  color: var(--background);
 }
 
 ::-moz-selection {
-  background: rgb(0 255 255 / 0.3);
-  color: var(--spark-white);
+  background: var(--primary-glow);
+  color: var(--background);
 }
 
 /* Focus Visible Styles for Accessibility */
 :focus-visible {
-  outline: 2px solid var(--arcane-gold);
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
+  border-radius: 2px;
 }
 
 /* Reduced Motion for Accessibility */
@@ -440,5 +435,18 @@ main {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  nav, footer {
+    display: none;
   }
 }

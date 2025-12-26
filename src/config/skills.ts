@@ -2,14 +2,12 @@
  * Skills & Certifications Configuration
  */
 
-export type SkillCategory = 'languages' | 'frameworks' | 'infrastructure' | 'security' | 'devops'
+export type SkillCategory = 'infrastructure' | 'security' | 'ai'
 
 export interface Skill {
   name: string
-  level: number // 0-100
   category: SkillCategory
   icon?: string // Icon name from lucide-react or custom
-  glowColor: 'cyan' | 'green' | 'gold' | 'purple' | 'crimson'
 }
 
 export interface Certification {
@@ -22,144 +20,53 @@ export interface Certification {
 }
 
 export const skills: Skill[] = [
-  // Languages
-  {
-    name: 'Python',
-    level: 85,
-    category: 'languages',
-    glowColor: 'cyan',
-  },
-  {
-    name: 'Bash/Shell',
-    level: 90,
-    category: 'languages',
-    glowColor: 'cyan',
-  },
-  {
-    name: 'JavaScript',
-    level: 75,
-    category: 'languages',
-    glowColor: 'cyan',
-  },
-  {
-    name: 'TypeScript',
-    level: 70,
-    category: 'languages',
-    glowColor: 'cyan',
-  },
-
-  // Frameworks
-  {
-    name: 'Next.js',
-    level: 80,
-    category: 'frameworks',
-    glowColor: 'cyan',
-  },
-  {
-    name: 'React',
-    level: 75,
-    category: 'frameworks',
-    glowColor: 'cyan',
-  },
-  {
-    name: 'Tailwind CSS',
-    level: 85,
-    category: 'frameworks',
-    glowColor: 'cyan',
-  },
-
   // Infrastructure
-  {
-    name: 'Proxmox',
-    level: 90,
-    category: 'infrastructure',
-    glowColor: 'green',
-  },
-  {
-    name: 'Docker',
-    level: 95,
-    category: 'infrastructure',
-    glowColor: 'green',
-  },
-  {
-    name: 'Kubernetes',
-    level: 65,
-    category: 'infrastructure',
-    glowColor: 'green',
-  },
-  {
-    name: 'Linux Administration',
-    level: 90,
-    category: 'infrastructure',
-    glowColor: 'green',
-  },
-  {
-    name: 'Nginx/Caddy',
-    level: 85,
-    category: 'infrastructure',
-    glowColor: 'green',
-  },
+  { name: 'Docker', category: 'infrastructure' },
+  { name: 'Proxmox', category: 'infrastructure' },
+  { name: 'Linux Administration', category: 'infrastructure' },
+  { name: 'Nginx', category: 'infrastructure' },
+  { name: 'Caddy', category: 'infrastructure' },
+  { name: 'Synology NAS', category: 'infrastructure' },
+  { name: 'Self-Hosting', category: 'infrastructure' },
+  { name: 'Networking', category: 'infrastructure' },
 
   // Security
-  {
-    name: 'Penetration Testing',
-    level: 70,
-    category: 'security',
-    glowColor: 'crimson',
-  },
-  {
-    name: 'Network Security',
-    level: 75,
-    category: 'security',
-    glowColor: 'crimson',
-  },
-  {
-    name: 'Web Application Security',
-    level: 65,
-    category: 'security',
-    glowColor: 'crimson',
-  },
-  {
-    name: 'Vulnerability Assessment',
-    level: 70,
-    category: 'security',
-    glowColor: 'crimson',
-  },
+  { name: 'BurpSuite', category: 'security' },
+  { name: 'Nmap', category: 'security' },
+  { name: 'Nuclei', category: 'security' },
+  { name: 'Metasploit', category: 'security' },
+  { name: 'ffuf', category: 'security' },
+  { name: 'httpx', category: 'security' },
+  { name: 'Web Application Security', category: 'security' },
+  { name: 'Vulnerability Assessment', category: 'security' },
+  { name: 'Penetration Testing', category: 'security' },
 
-  // DevOps
-  {
-    name: 'Git/GitHub',
-    level: 90,
-    category: 'devops',
-    glowColor: 'green',
-  },
-  {
-    name: 'CI/CD',
-    level: 75,
-    category: 'devops',
-    glowColor: 'green',
-  },
-  {
-    name: 'n8n Automation',
-    level: 85,
-    category: 'devops',
-    glowColor: 'green',
-  },
-  {
-    name: 'Monitoring & Logging',
-    level: 70,
-    category: 'devops',
-    glowColor: 'green',
-  },
+  // AI
+  { name: 'AI Prompting', category: 'ai' },
+  { name: 'AI Engineering', category: 'ai' },
+  { name: 'LLM Integration', category: 'ai' },
 ]
 
 export const certifications: Certification[] = [
   {
-    name: 'OSCP',
-    issuer: 'Offensive Security',
-    year: 'In Progress',
-    status: 'in-progress',
-    link: 'https://www.offensive-security.com/pwk-oscp/',
+    name: 'TryHackMe Pre-Security',
+    issuer: 'TryHackMe',
+    year: 2023,
+    status: 'completed',
+    link: 'https://tryhackme.com/p/bobthebum21',
+  },
+  {
+    name: 'Advent of Cyber 2025',
+    issuer: 'TryHackMe',
+    year: 2025,
+    status: 'completed',
+    link: 'https://tryhackme.com/p/bobthebum21',
+  },
+  {
+    name: 'Nmap Hands-On',
+    issuer: 'Udemy',
+    year: 2024,
+    status: 'completed',
   },
   {
     name: 'eJPT',
@@ -180,10 +87,6 @@ export const certifications: Certification[] = [
 // Helper functions
 export function getSkillsByCategory(category: SkillCategory): Skill[] {
   return skills.filter((skill) => skill.category === category)
-}
-
-export function getTopSkills(limit: number = 10): Skill[] {
-  return [...skills].sort((a, b) => b.level - a.level).slice(0, limit)
 }
 
 export function getCertificationsByStatus(

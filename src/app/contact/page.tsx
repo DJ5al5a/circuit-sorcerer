@@ -2,9 +2,8 @@
 
 import { Navigation } from '@/components/layout/Navigation'
 import { Footer } from '@/components/layout/Footer'
-import { motion } from 'framer-motion'
-import { fadeInUp, staggerContainer } from '@/lib/animations'
-import { Mail, Github, Linkedin, Twitter, Send, Film } from 'lucide-react'
+import { TerminalIcon } from '@/components/icons/CircuitIcons'
+import { Mail, Github, MessageSquare, Send, Film } from 'lucide-react'
 import { useState } from 'react'
 import { siteConfig } from '@/config/site'
 
@@ -75,192 +74,193 @@ export default function ContactPage() {
       setIsSubmittingRequest(false)
     }
   }
+
   return (
     <>
       <Navigation />
       <div className="h-24"></div>
-      <main className="min-h-screen bg-void">
-        <div className="container mx-auto px-4 py-16">
-          <motion.h1
-            className="mb-8 font-display text-5xl font-bold text-electric-cyan text-glow-cyan md:text-7xl"
-            initial="hidden"
-            animate="visible"
-            variants={fadeInUp}
-          >
-            Contact
-          </motion.h1>
+      <main className="min-h-screen relative flex justify-center">
+        {/* Background Image */}
+        <div
+          className="fixed inset-0 bg-cover bg-center opacity-30 -z-10"
+          style={{
+            backgroundImage: 'url(/sorcerer.jpeg)',
+            filter: 'brightness(0.4)'
+          }}
+        />
+        <div className="fixed inset-0 bg-background/80 -z-10" />
 
-          <motion.div
-            className="max-w-6xl mx-auto space-y-12"
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-          >
-            {/* Social Links */}
-            <motion.div
-              className="bg-abyss rounded-lg p-8 border border-electric-cyan/30"
-              variants={fadeInUp}
+        <div className="w-full max-w-7xl mx-auto p-4 md:p-8 space-y-8">
+          {/* Page Header */}
+          <div className="dashboard-card">
+            <TerminalIcon size={48} className="text-primary mb-4" />
+            <span className="tech-label">CONTACT</span>
+            <h1 className="text-4xl md:text-5xl font-bold text-text-primary mb-4">
+              Get In Touch
+            </h1>
+            <p className="text-text-secondary">
+              Feel free to reach out through any of these channels:
+            </p>
+          </div>
+
+          {/* Social Links */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <a
+              href={`mailto:${siteConfig.author.email}`}
+              className="dashboard-card hover:border-primary flex items-center gap-4"
             >
-              <p className="text-xl text-text-secondary mb-6">
-                Feel free to reach out through any of these channels:
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <a
-                  href={`mailto:${siteConfig.author.email}`}
-                  className="flex items-center gap-4 rounded-lg border border-electric-cyan/30 bg-shadow p-6 text-electric-cyan transition-all hover:border-electric-cyan hover-glow-cyan"
-                >
-                  <Mail className="h-6 w-6" />
-                  <span className="text-lg">{siteConfig.author.email}</span>
-                </a>
-
-                <a
-                  href={siteConfig.author.social.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 rounded-lg border border-electric-cyan/30 bg-shadow p-6 text-electric-cyan transition-all hover:border-electric-cyan hover-glow-cyan"
-                >
-                  <Github className="h-6 w-6" />
-                  <span className="text-lg">GitHub</span>
-                </a>
-
-                <a
-                  href={siteConfig.author.social.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 rounded-lg border border-electric-cyan/30 bg-shadow p-6 text-electric-cyan transition-all hover:border-electric-cyan hover-glow-cyan"
-                >
-                  <Linkedin className="h-6 w-6" />
-                  <span className="text-lg">LinkedIn</span>
-                </a>
-
-                <a
-                  href={siteConfig.author.social.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 rounded-lg border border-electric-cyan/30 bg-shadow p-6 text-electric-cyan transition-all hover:border-electric-cyan hover-glow-cyan"
-                >
-                  <Twitter className="h-6 w-6" />
-                  <span className="text-lg">Twitter/X</span>
-                </a>
+              <Mail size={24} className="text-primary" />
+              <div>
+                <div className="text-xs text-text-tertiary font-mono">EMAIL</div>
+                <div className="text-sm text-text-secondary">{siteConfig.author.email}</div>
               </div>
-            </motion.div>
+            </a>
 
-            {/* Contact Form */}
-            <motion.div
-              className="bg-shadow rounded-lg p-8 border border-electric-cyan/30"
-              variants={fadeInUp}
+            <a
+              href={`mailto:${siteConfig.author.emailSecondary}`}
+              className="dashboard-card hover:border-primary flex items-center gap-4"
             >
-              <h2 className="font-display text-2xl font-bold text-electric-cyan mb-6">Send a Message</h2>
-              <form onSubmit={handleContactSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-text-secondary mb-2">Name</label>
-                    <input
-                      type="text"
-                      value={contactForm.name}
-                      onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                      className="w-full p-3 bg-void border border-electric-cyan/30 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-text-secondary mb-2">Email</label>
-                    <input
-                      type="email"
-                      value={contactForm.email}
-                      onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                      className="w-full p-3 bg-void border border-electric-cyan/30 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
-                      required
-                    />
-                  </div>
-                </div>
+              <Mail size={24} className="text-primary" />
+              <div>
+                <div className="text-xs text-text-tertiary font-mono">EMAIL (ALTERNATE)</div>
+                <div className="text-sm text-text-secondary">{siteConfig.author.emailSecondary}</div>
+              </div>
+            </a>
+
+            <a
+              href={siteConfig.author.social.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="dashboard-card hover:border-primary flex items-center gap-4"
+            >
+              <Github size={24} className="text-primary" />
+              <div>
+                <div className="text-xs text-text-tertiary font-mono">GITHUB</div>
+                <div className="text-sm text-text-secondary">DJ5al5a</div>
+              </div>
+            </a>
+
+            <div className="dashboard-card bg-surface-elevated flex items-center gap-4">
+              <MessageSquare size={24} className="text-accent" />
+              <div>
+                <div className="text-xs text-text-tertiary font-mono">DISCORD</div>
+                <div className="text-sm text-text-secondary">{siteConfig.author.discord}</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact Form */}
+          <div className="dashboard-card">
+            <span className="tech-label">MESSAGE</span>
+            <h2 className="text-2xl font-bold text-text-primary mb-6">Send a Message</h2>
+            <form onSubmit={handleContactSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-text-secondary mb-2">Message</label>
-                  <textarea
-                    value={contactForm.message}
-                    onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                    className="w-full p-3 bg-void border border-electric-cyan/30 rounded focus:border-electric-cyan focus:outline-none text-text-primary resize-vertical"
-                    rows={4}
+                  <label className="block text-text-secondary mb-2 text-sm">Name</label>
+                  <input
+                    type="text"
+                    value={contactForm.name}
+                    onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
+                    className="w-full p-3 bg-surface border border-border rounded focus:border-primary focus:outline-none text-text-primary"
                     required
                   />
                 </div>
-                <button
-                  type="submit"
-                  disabled={isSubmittingContact}
-                  className="w-full py-3 bg-electric-cyan text-void font-semibold rounded hover:bg-electric-cyan/80 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
-                >
-                  <Send className="h-4 w-4" />
-                  {isSubmittingContact ? 'Sending...' : 'Send Message'}
-                </button>
-              </form>
-            </motion.div>
-
-            {/* Movie/TV Request Form */}
-            <motion.div
-              className="bg-abyss rounded-lg p-8 border border-electric-cyan/30"
-              variants={fadeInUp}
-            >
-              <h2 className="font-display text-2xl font-bold text-electric-cyan mb-6 flex items-center gap-3">
-                <Film className="h-6 w-6" />
-                Movie/TV Show Request
-              </h2>
-              <form onSubmit={handleRequestSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div>
-                    <label className="block text-text-secondary mb-2">Title</label>
-                    <input
-                      type="text"
-                      value={requestForm.title}
-                      onChange={(e) => setRequestForm({ ...requestForm, title: e.target.value })}
-                      className="w-full p-3 bg-void border border-electric-cyan/30 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
-                      placeholder="Movie or TV show title"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-text-secondary mb-2">Type</label>
-                    <select
-                      value={requestForm.type}
-                      onChange={(e) => setRequestForm({ ...requestForm, type: e.target.value })}
-                      className="w-full p-3 bg-void border border-electric-cyan/30 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
-                    >
-                      <option value="movie">Movie</option>
-                      <option value="tv">TV Show</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-text-secondary mb-2">Your Name</label>
-                    <input
-                      type="text"
-                      value={requestForm.name}
-                      onChange={(e) => setRequestForm({ ...requestForm, name: e.target.value })}
-                      className="w-full p-3 bg-void border border-electric-cyan/30 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
-                      required
-                    />
-                  </div>
-                </div>
                 <div>
-                  <label className="block text-text-secondary mb-2">Email</label>
+                  <label className="block text-text-secondary mb-2 text-sm">Email</label>
                   <input
                     type="email"
-                    value={requestForm.email}
-                    onChange={(e) => setRequestForm({ ...requestForm, email: e.target.value })}
-                    className="w-full p-3 bg-void border border-electric-cyan/30 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
+                    value={contactForm.email}
+                    onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
+                    className="w-full p-3 bg-surface border border-border rounded focus:border-primary focus:outline-none text-text-primary"
                     required
                   />
                 </div>
-                <button
-                  type="submit"
-                  disabled={isSubmittingRequest}
-                  className="w-full py-3 bg-electric-cyan text-void font-semibold rounded hover:bg-electric-cyan/80 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
-                >
-                  <Send className="h-4 w-4" />
-                  {isSubmittingRequest ? 'Submitting...' : 'Submit Request'}
-                </button>
-              </form>
-            </motion.div>
-          </motion.div>
+              </div>
+              <div>
+                <label className="block text-text-secondary mb-2 text-sm">Message</label>
+                <textarea
+                  value={contactForm.message}
+                  onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
+                  className="w-full p-3 bg-surface border border-border rounded focus:border-primary focus:outline-none text-text-primary resize-vertical"
+                  rows={4}
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={isSubmittingContact}
+                className="btn btn-primary w-full flex items-center justify-center gap-2"
+              >
+                <Send size={16} />
+                {isSubmittingContact ? 'Sending...' : 'Send Message'}
+              </button>
+            </form>
+          </div>
+
+          {/* Movie/TV Request Form */}
+          <div className="dashboard-card">
+            <div className="flex items-center gap-3 mb-6">
+              <Film size={32} className="text-accent" />
+              <div>
+                <span className="tech-label">EMBY REQUEST</span>
+                <h2 className="text-2xl font-bold text-text-primary">Movie/TV Show Request</h2>
+              </div>
+            </div>
+            <form onSubmit={handleRequestSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-text-secondary mb-2 text-sm">Title</label>
+                  <input
+                    type="text"
+                    value={requestForm.title}
+                    onChange={(e) => setRequestForm({ ...requestForm, title: e.target.value })}
+                    className="w-full p-3 bg-surface border border-border rounded focus:border-primary focus:outline-none text-text-primary"
+                    placeholder="Movie or TV show title"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-text-secondary mb-2 text-sm">Type</label>
+                  <select
+                    value={requestForm.type}
+                    onChange={(e) => setRequestForm({ ...requestForm, type: e.target.value })}
+                    className="w-full p-3 bg-surface border border-border rounded focus:border-primary focus:outline-none text-text-primary"
+                  >
+                    <option value="movie">Movie</option>
+                    <option value="tv">TV Show</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-text-secondary mb-2 text-sm">Your Name</label>
+                  <input
+                    type="text"
+                    value={requestForm.name}
+                    onChange={(e) => setRequestForm({ ...requestForm, name: e.target.value })}
+                    className="w-full p-3 bg-surface border border-border rounded focus:border-primary focus:outline-none text-text-primary"
+                    required
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-text-secondary mb-2 text-sm">Email</label>
+                <input
+                  type="email"
+                  value={requestForm.email}
+                  onChange={(e) => setRequestForm({ ...requestForm, email: e.target.value })}
+                  className="w-full p-3 bg-surface border border-border rounded focus:border-primary focus:outline-none text-text-primary"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={isSubmittingRequest}
+                className="btn btn-primary w-full flex items-center justify-center gap-2"
+              >
+                <Send size={16} />
+                {isSubmittingRequest ? 'Submitting...' : 'Submit Request'}
+              </button>
+            </form>
+          </div>
         </div>
       </main>
       <Footer />

@@ -40,9 +40,6 @@ export function HeroDashboard() {
           <Link href="/contact" className="btn btn-outline">
             Contact Me
           </Link>
-          <Link href="/resume" className="btn btn-outline">
-            Resume
-          </Link>
         </div>
 
         {/* Quick Stats Row */}

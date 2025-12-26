@@ -69,12 +69,6 @@ export function Navigation() {
                 {link.name}
               </Link>
             ))}
-            <Link
-              href="/resume"
-              className="btn btn-outline text-sm"
-            >
-              My Accomplishments
-            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -111,13 +105,6 @@ export function Navigation() {
                   {link.name}
                 </Link>
               ))}
-              <Link
-                href="/resume"
-                className="mx-4 btn btn-outline text-sm text-center"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                My Accomplishments
-              </Link>
             </div>
           </div>
         )}

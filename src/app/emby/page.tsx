@@ -137,6 +137,37 @@ export default function EmbyPage() {
               </div>
             </motion.div>
 
+            {/* Request Access */}
+            <motion.div
+              className="bg-shadow rounded-lg p-8 border border-electric-cyan/30"
+              variants={fadeInUp}
+            >
+              <h2 className="font-display text-2xl font-bold text-electric-cyan mb-6">Request Access</h2>
+              <p className="text-text-secondary mb-6">
+                Don't have an account? Send a request to get access to the Emby server.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <a
+                  href="mailto:mjm.itguy@gmail.com?subject=Emby Server Access Request&body=Hi,%0D%0A%0D%0AI would like to request access to your Emby server.%0D%0A%0D%0AName:%0D%0AEmail:%0D%0AReason for access:%0D%0A%0D%0AThank you!"
+                  className="flex items-center justify-center gap-2 px-6 py-4 bg-electric-cyan/10 border border-electric-cyan/30 text-electric-cyan font-semibold rounded hover:bg-electric-cyan/20 transition-colors"
+                >
+                  <ExternalLink className="h-5 w-5" />
+                  Email Request
+                </a>
+                <a
+                  href="/contact"
+                  className="flex items-center justify-center gap-2 px-6 py-4 bg-electric-cyan/10 border border-electric-cyan/30 text-electric-cyan font-semibold rounded hover:bg-electric-cyan/20 transition-colors"
+                >
+                  Contact Form
+                </a>
+              </div>
+              <div className="mt-6 p-4 bg-void rounded border border-electric-cyan/20">
+                <p className="text-text-secondary text-sm">
+                  Include your name, email, and reason for wanting access. Requests are typically reviewed within 24-48 hours.
+                </p>
+              </div>
+            </motion.div>
+
             {/* Connection Instructions */}
             <motion.div
               className="bg-abyss rounded-lg p-8 border border-electric-cyan/30"

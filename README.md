@@ -14,12 +14,23 @@ Personal portfolio website showcasing homelab infrastructure, security projects,
 
 ## Features
 
+### Frontend
 - Dark industrial tech theme
 - Dashboard card-based layout
 - Project showcase with filtering
 - Skills and certifications display
 - Responsive design
 - Static export optimized
+
+### Backend
+- Contact form with email notifications
+- Media request system
+- Emby user registration with admin approval
+- n8n workflow automation
+- PostgreSQL database integration
+- Discord & Telegram notifications
+
+See [`backend/README.md`](./backend/README.md) for backend setup instructions.
 
 ## Development
 

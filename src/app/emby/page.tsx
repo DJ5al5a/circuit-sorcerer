@@ -6,25 +6,13 @@ import { embyData } from '@/config/emby'
 import { motion } from 'framer-motion'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 import { useState, useEffect } from 'react'
-import { Monitor, AlertCircle, CheckCircle, XCircle, User, Lock, Mail, Smartphone, Tv, Tablet, Laptop } from 'lucide-react'
+import { Monitor, AlertCircle, CheckCircle, XCircle, ExternalLink, Smartphone, Tv, Tablet, Laptop } from 'lucide-react'
 
 type StatusType = 'up' | 'maintenance' | 'down'
-
-interface StatusResponse {
-  status: StatusType
-  message?: string
-}
 
 export default function EmbyPage() {
   const [serverStatus, setServerStatus] = useState<StatusType>('up')
   const [statusMessage, setStatusMessage] = useState('')
-  const [name, setName] = useState('')
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [loginUsername, setLoginUsername] = useState('')
-  const [loginPassword, setLoginPassword] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     const checkStatus = async () => {
@@ -54,44 +42,6 @@ export default function EmbyPage() {
     const interval = setInterval(checkStatus, 30000) // Check every 30 seconds
     return () => clearInterval(interval)
   }, [])
-
-  const handleRegistration = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (password !== confirmPassword) {
-      alert('Passwords do not match')
-      return
-    }
-    setIsSubmitting(true)
-
-    try {
-      const response = await fetch('/api/emby/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, username, password, confirmPassword })
-      })
-
-      const data = await response.json()
-
-      if (response.ok) {
-        alert(data.message || 'Registration request sent! You will be contacted for approval.')
-        setName('')
-        setUsername('')
-        setPassword('')
-        setConfirmPassword('')
-      } else {
-        alert(data.error || 'Failed to submit registration. Please try again.')
-      }
-    } catch (error) {
-      alert('An error occurred. Please try again.')
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault()
-    window.open(`https://${embyData.serverUrl}`, '_blank')
-  }
 
   const getStatusIcon = () => {
     switch (serverStatus) {
@@ -162,97 +112,29 @@ export default function EmbyPage() {
               </div>
             </motion.div>
 
-            {/* User Dashboard */}
+            {/* Access Emby Server */}
             <motion.div
               className="bg-abyss rounded-lg p-8 border border-electric-cyan/30"
               variants={fadeInUp}
             >
-              <h2 className="font-display text-2xl font-bold text-electric-cyan mb-6">User Dashboard</h2>
-              <form onSubmit={handleLogin} className="space-y-4">
-                <div>
-                  <label className="block text-text-secondary mb-2">Username</label>
-                  <input
-                    type="text"
-                    value={loginUsername}
-                    onChange={(e) => setLoginUsername(e.target.value)}
-                    className="w-full p-3 bg-void border border-electric-cyan/30 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-text-secondary mb-2">Password</label>
-                  <input
-                    type="password"
-                    value={loginPassword}
-                    onChange={(e) => setLoginPassword(e.target.value)}
-                    className="w-full p-3 bg-void border border-electric-cyan/30 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
-                    required
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full py-3 bg-electric-cyan text-void font-semibold rounded hover:bg-electric-cyan/80 transition-colors"
-                >
-                  Login to Emby Server
-                </button>
-              </form>
-            </motion.div>
-
-            {/* Registration */}
-            <motion.div
-              className="bg-shadow rounded-lg p-8 border border-electric-cyan/30"
-              variants={fadeInUp}
-            >
-              <h2 className="font-display text-2xl font-bold text-electric-cyan mb-6">Request Access</h2>
-              <form onSubmit={handleRegistration} className="space-y-4">
-                <div>
-                  <label className="block text-text-secondary mb-2">Name</label>
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="w-full p-3 bg-void border border-electric-cyan/30 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-text-secondary mb-2">Username</label>
-                  <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    className="w-full p-3 bg-void border border-electric-cyan/30 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-text-secondary mb-2">Password</label>
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full p-3 bg-void border border-electric-cyan/30 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-text-secondary mb-2">Confirm Password</label>
-                  <input
-                    type="password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full p-3 bg-void border border-electric-cyan/30 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
-                    required
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-3 bg-electric-cyan text-void font-semibold rounded hover:bg-electric-cyan/80 transition-colors disabled:opacity-50"
-                >
-                  {isSubmitting ? 'Submitting...' : 'Request Access'}
-                </button>
-              </form>
+              <h2 className="font-display text-2xl font-bold text-electric-cyan mb-6">Access Server</h2>
+              <p className="text-text-secondary mb-6">
+                Click the button below to access the Emby media server. You'll need your login credentials to sign in.
+              </p>
+              <a
+                href={`https://${embyData.serverUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-electric-cyan text-void font-semibold rounded hover:bg-electric-cyan/80 transition-colors"
+              >
+                Open Emby Server
+                <ExternalLink className="h-5 w-5" />
+              </a>
+              <div className="mt-6 p-4 bg-void rounded border border-electric-cyan/20">
+                <p className="text-text-secondary text-sm">
+                  <strong className="text-electric-cyan">Server URL:</strong> {embyData.serverUrl}
+                </p>
+              </div>
             </motion.div>
 
             {/* Connection Instructions */}

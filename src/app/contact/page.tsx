@@ -3,7 +3,7 @@
 import { Navigation } from '@/components/layout/Navigation'
 import { Footer } from '@/components/layout/Footer'
 import { TerminalIcon } from '@/components/icons/CircuitIcons'
-import { Mail, Github, MessageSquare, Send, Film } from 'lucide-react'
+import { Mail, Github, MessageSquare, Send } from 'lucide-react'
 import { useState } from 'react'
 import { siteConfig } from '@/config/site'
 
@@ -13,21 +13,14 @@ export default function ContactPage() {
     email: '',
     message: ''
   })
-  const [requestForm, setRequestForm] = useState({
-    title: '',
-    type: 'movie',
-    name: '',
-    email: ''
-  })
   const [isSubmittingContact, setIsSubmittingContact] = useState(false)
-  const [isSubmittingRequest, setIsSubmittingRequest] = useState(false)
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmittingContact(true)
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('https://n8n.circuitsorcerer.us.kg/webhook/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...contactForm, type: 'contact' })
@@ -43,35 +36,6 @@ export default function ContactPage() {
       alert('An error occurred. Please try again.')
     } finally {
       setIsSubmittingContact(false)
-    }
-  }
-
-  const handleRequestSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmittingRequest(true)
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: requestForm.name,
-          email: requestForm.email,
-          message: `${requestForm.type.toUpperCase()} Request: ${requestForm.title}`,
-          type: 'media-request'
-        })
-      })
-
-      if (response.ok) {
-        alert('Request submitted! I will review it.')
-        setRequestForm({ title: '', type: 'movie', name: '', email: '' })
-      } else {
-        alert('Failed to submit request. Please try again.')
-      }
-    } catch (error) {
-      alert('An error occurred. Please try again.')
-    } finally {
-      setIsSubmittingRequest(false)
     }
   }
 
@@ -193,71 +157,6 @@ export default function ContactPage() {
               >
                 <Send size={16} />
                 {isSubmittingContact ? 'Sending...' : 'Send Message'}
-              </button>
-            </form>
-          </div>
-
-          {/* Movie/TV Request Form */}
-          <div className="dashboard-card">
-            <div className="flex items-center gap-3 mb-6">
-              <Film size={32} className="text-accent" />
-              <div>
-                <span className="tech-label">EMBY REQUEST</span>
-                <h2 className="text-2xl font-bold text-text-primary">Movie/TV Show Request</h2>
-              </div>
-            </div>
-            <form onSubmit={handleRequestSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-text-secondary mb-2 text-sm">Title</label>
-                  <input
-                    type="text"
-                    value={requestForm.title}
-                    onChange={(e) => setRequestForm({ ...requestForm, title: e.target.value })}
-                    className="w-full p-3 bg-surface border border-border rounded focus:border-primary focus:outline-none text-text-primary"
-                    placeholder="Movie or TV show title"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-text-secondary mb-2 text-sm">Type</label>
-                  <select
-                    value={requestForm.type}
-                    onChange={(e) => setRequestForm({ ...requestForm, type: e.target.value })}
-                    className="w-full p-3 bg-surface border border-border rounded focus:border-primary focus:outline-none text-text-primary"
-                  >
-                    <option value="movie">Movie</option>
-                    <option value="tv">TV Show</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-text-secondary mb-2 text-sm">Your Name</label>
-                  <input
-                    type="text"
-                    value={requestForm.name}
-                    onChange={(e) => setRequestForm({ ...requestForm, name: e.target.value })}
-                    className="w-full p-3 bg-surface border border-border rounded focus:border-primary focus:outline-none text-text-primary"
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-text-secondary mb-2 text-sm">Email</label>
-                <input
-                  type="email"
-                  value={requestForm.email}
-                  onChange={(e) => setRequestForm({ ...requestForm, email: e.target.value })}
-                  className="w-full p-3 bg-surface border border-border rounded focus:border-primary focus:outline-none text-text-primary"
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={isSubmittingRequest}
-                className="btn btn-primary w-full flex items-center justify-center gap-2"
-              >
-                <Send size={16} />
-                {isSubmittingRequest ? 'Submitting...' : 'Submit Request'}
               </button>
             </form>
           </div>

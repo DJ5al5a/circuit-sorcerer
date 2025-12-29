@@ -6,13 +6,27 @@ import { embyData } from '@/config/emby'
 import { motion } from 'framer-motion'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 import { useState, useEffect } from 'react'
-import { Monitor, AlertCircle, CheckCircle, XCircle, ExternalLink, Smartphone, Tv, Tablet, Laptop } from 'lucide-react'
+import { Monitor, AlertCircle, CheckCircle, XCircle, ExternalLink, Smartphone, Tv, Tablet, Laptop, Film, Send, UserPlus } from 'lucide-react'
 
 type StatusType = 'up' | 'maintenance' | 'down'
 
 export default function EmbyPage() {
   const [serverStatus, setServerStatus] = useState<StatusType>('up')
   const [statusMessage, setStatusMessage] = useState('')
+  const [mediaRequestForm, setMediaRequestForm] = useState({
+    title: '',
+    type: 'movie',
+    name: '',
+    email: ''
+  })
+  const [registrationForm, setRegistrationForm] = useState({
+    name: '',
+    email: '',
+    username: '',
+    password: ''
+  })
+  const [isSubmittingMediaRequest, setIsSubmittingMediaRequest] = useState(false)
+  const [isSubmittingRegistration, setIsSubmittingRegistration] = useState(false)
 
   useEffect(() => {
     const checkStatus = async () => {
@@ -62,6 +76,64 @@ export default function EmbyPage() {
         return 'border-yellow-400/30 bg-yellow-400/10'
       case 'down':
         return 'border-red-400/30 bg-red-400/10'
+    }
+  }
+
+  const handleMediaRequestSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmittingMediaRequest(true)
+
+    try {
+      const response = await fetch('https://n8n.circuitsorcerer.us.kg/webhook/media-request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: mediaRequestForm.title,
+          type: mediaRequestForm.type,
+          name: mediaRequestForm.name,
+          email: mediaRequestForm.email
+        })
+      })
+
+      if (response.ok) {
+        alert('Request submitted! I will review it and add it to the server.')
+        setMediaRequestForm({ title: '', type: 'movie', name: '', email: '' })
+      } else {
+        alert('Failed to submit request. Please try again.')
+      }
+    } catch (error) {
+      alert('An error occurred. Please try again.')
+    } finally {
+      setIsSubmittingMediaRequest(false)
+    }
+  }
+
+  const handleRegistrationSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmittingRegistration(true)
+
+    try {
+      const response = await fetch('https://n8n.circuitsorcerer.us.kg/webhook/emby-registration', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: registrationForm.name,
+          email: registrationForm.email,
+          username: registrationForm.username,
+          password: registrationForm.password
+        })
+      })
+
+      if (response.ok) {
+        alert('Registration request submitted! You will receive a response within 24-48 hours.')
+        setRegistrationForm({ name: '', email: '', username: '', password: '' })
+      } else {
+        alert('Failed to submit registration. Please try again.')
+      }
+    } catch (error) {
+      alert('An error occurred. Please try again.')
+    } finally {
+      setIsSubmittingRegistration(false)
     }
   }
 
@@ -137,35 +209,145 @@ export default function EmbyPage() {
               </div>
             </motion.div>
 
-            {/* Request Access */}
+            {/* Media Request Form */}
             <motion.div
               className="bg-shadow rounded-lg p-8 border border-electric-cyan/30"
               variants={fadeInUp}
             >
-              <h2 className="font-display text-2xl font-bold text-electric-cyan mb-6">Request Access</h2>
-              <p className="text-text-secondary mb-6">
-                Don't have an account? Send a request to get access to the Emby server.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <a
-                  href="mailto:mjm.itguy@gmail.com?subject=Emby Server Access Request&body=Hi,%0D%0A%0D%0AI would like to request access to your Emby server.%0D%0A%0D%0AName:%0D%0AEmail:%0D%0AReason for access:%0D%0A%0D%0AThank you!"
-                  className="flex items-center justify-center gap-2 px-6 py-4 bg-electric-cyan/10 border border-electric-cyan/30 text-electric-cyan font-semibold rounded hover:bg-electric-cyan/20 transition-colors"
-                >
-                  <ExternalLink className="h-5 w-5" />
-                  Email Request
-                </a>
-                <a
-                  href="/contact"
-                  className="flex items-center justify-center gap-2 px-6 py-4 bg-electric-cyan/10 border border-electric-cyan/30 text-electric-cyan font-semibold rounded hover:bg-electric-cyan/20 transition-colors"
-                >
-                  Contact Form
-                </a>
+              <div className="flex items-center gap-3 mb-6">
+                <Film className="h-8 w-8 text-arcane-gold" />
+                <div>
+                  <h2 className="font-display text-2xl font-bold text-electric-cyan">Request Movie/TV Show</h2>
+                  <p className="text-text-secondary text-sm">Can't find what you're looking for? Request it!</p>
+                </div>
               </div>
-              <div className="mt-6 p-4 bg-void rounded border border-electric-cyan/20">
-                <p className="text-text-secondary text-sm">
-                  Include your name, email, and reason for wanting access. Requests are typically reviewed within 24-48 hours.
-                </p>
+              <form onSubmit={handleMediaRequestSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-text-secondary mb-2 text-sm">Title</label>
+                    <input
+                      type="text"
+                      value={mediaRequestForm.title}
+                      onChange={(e) => setMediaRequestForm({ ...mediaRequestForm, title: e.target.value })}
+                      className="w-full p-3 bg-abyss border border-electric-cyan/20 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
+                      placeholder="Movie or TV show title"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-text-secondary mb-2 text-sm">Type</label>
+                    <select
+                      value={mediaRequestForm.type}
+                      onChange={(e) => setMediaRequestForm({ ...mediaRequestForm, type: e.target.value })}
+                      className="w-full p-3 bg-abyss border border-electric-cyan/20 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
+                    >
+                      <option value="movie">Movie</option>
+                      <option value="tv">TV Show</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-text-secondary mb-2 text-sm">Your Name</label>
+                    <input
+                      type="text"
+                      value={mediaRequestForm.name}
+                      onChange={(e) => setMediaRequestForm({ ...mediaRequestForm, name: e.target.value })}
+                      className="w-full p-3 bg-abyss border border-electric-cyan/20 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
+                      required
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-text-secondary mb-2 text-sm">Email</label>
+                  <input
+                    type="email"
+                    value={mediaRequestForm.email}
+                    onChange={(e) => setMediaRequestForm({ ...mediaRequestForm, email: e.target.value })}
+                    className="w-full p-3 bg-abyss border border-electric-cyan/20 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={isSubmittingMediaRequest}
+                  className="w-full px-6 py-4 bg-electric-cyan text-void font-semibold rounded hover:bg-electric-cyan/80 transition-colors flex items-center justify-center gap-2"
+                >
+                  <Send className="h-5 w-5" />
+                  {isSubmittingMediaRequest ? 'Submitting...' : 'Submit Request'}
+                </button>
+              </form>
+            </motion.div>
+
+            {/* Account Registration Form */}
+            <motion.div
+              className="bg-shadow rounded-lg p-8 border border-electric-cyan/30"
+              variants={fadeInUp}
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <UserPlus className="h-8 w-8 text-arcane-gold" />
+                <div>
+                  <h2 className="font-display text-2xl font-bold text-electric-cyan">Request Account Access</h2>
+                  <p className="text-text-secondary text-sm">Don't have an account? Request access to the Emby server.</p>
+                </div>
               </div>
+              <form onSubmit={handleRegistrationSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-text-secondary mb-2 text-sm">Name</label>
+                    <input
+                      type="text"
+                      value={registrationForm.name}
+                      onChange={(e) => setRegistrationForm({ ...registrationForm, name: e.target.value })}
+                      className="w-full p-3 bg-abyss border border-electric-cyan/20 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-text-secondary mb-2 text-sm">Email</label>
+                    <input
+                      type="email"
+                      value={registrationForm.email}
+                      onChange={(e) => setRegistrationForm({ ...registrationForm, email: e.target.value })}
+                      className="w-full p-3 bg-abyss border border-electric-cyan/20 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-text-secondary mb-2 text-sm">Desired Username</label>
+                    <input
+                      type="text"
+                      value={registrationForm.username}
+                      onChange={(e) => setRegistrationForm({ ...registrationForm, username: e.target.value })}
+                      className="w-full p-3 bg-abyss border border-electric-cyan/20 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-text-secondary mb-2 text-sm">Desired Password</label>
+                    <input
+                      type="password"
+                      value={registrationForm.password}
+                      onChange={(e) => setRegistrationForm({ ...registrationForm, password: e.target.value })}
+                      className="w-full p-3 bg-abyss border border-electric-cyan/20 rounded focus:border-electric-cyan focus:outline-none text-text-primary"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="p-4 bg-void rounded border border-electric-cyan/20">
+                  <p className="text-text-secondary text-sm">
+                    Requests are typically reviewed within 24-48 hours. You'll receive a confirmation email once your account is approved.
+                  </p>
+                </div>
+                <button
+                  type="submit"
+                  disabled={isSubmittingRegistration}
+                  className="w-full px-6 py-4 bg-electric-cyan text-void font-semibold rounded hover:bg-electric-cyan/80 transition-colors flex items-center justify-center gap-2"
+                >
+                  <UserPlus className="h-5 w-5" />
+                  {isSubmittingRegistration ? 'Submitting...' : 'Request Access'}
+                </button>
+              </form>
             </motion.div>
 
             {/* Connection Instructions */}

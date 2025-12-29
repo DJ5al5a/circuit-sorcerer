@@ -6,7 +6,7 @@ import { embyData } from '@/config/emby'
 import { motion } from 'framer-motion'
 import { fadeInUp, staggerContainer } from '@/lib/animations'
 import { useState, useEffect } from 'react'
-import { Monitor, AlertCircle, CheckCircle, XCircle, ExternalLink, Smartphone, Tv, Tablet, Laptop, Film, Send, UserPlus } from 'lucide-react'
+import { Monitor, AlertCircle, CheckCircle, XCircle, ExternalLink, Smartphone, Tv, Laptop, Film, Send, UserPlus } from 'lucide-react'
 
 type StatusType = 'up' | 'maintenance' | 'down'
 
@@ -46,7 +46,7 @@ export default function EmbyPage() {
           setServerStatus('down')
           setStatusMessage('Server is offline')
         }
-      } catch (error) {
+      } catch {
         setServerStatus('down')
         setStatusMessage('Unable to check server status')
       }
@@ -101,7 +101,7 @@ export default function EmbyPage() {
       } else {
         alert('Failed to submit request. Please try again.')
       }
-    } catch (error) {
+    } catch {
       alert('An error occurred. Please try again.')
     } finally {
       setIsSubmittingMediaRequest(false)
@@ -130,7 +130,7 @@ export default function EmbyPage() {
       } else {
         alert('Failed to submit registration. Please try again.')
       }
-    } catch (error) {
+    } catch {
       alert('An error occurred. Please try again.')
     } finally {
       setIsSubmittingRegistration(false)
@@ -191,7 +191,7 @@ export default function EmbyPage() {
             >
               <h2 className="font-display text-2xl font-bold text-electric-cyan mb-6">Access Server</h2>
               <p className="text-text-secondary mb-6">
-                Click the button below to access the Emby media server. You'll need your login credentials to sign in.
+                Click the button below to access the Emby media server. You&apos;ll need your login credentials to sign in.
               </p>
               <a
                 href={`https://${embyData.serverUrl}`}
@@ -218,7 +218,7 @@ export default function EmbyPage() {
                 <Film className="h-8 w-8 text-arcane-gold" />
                 <div>
                   <h2 className="font-display text-2xl font-bold text-electric-cyan">Request Movie/TV Show</h2>
-                  <p className="text-text-secondary text-sm">Can't find what you're looking for? Request it!</p>
+                  <p className="text-text-secondary text-sm">Can&apos;t find what you&apos;re looking for? Request it!</p>
                 </div>
               </div>
               <form onSubmit={handleMediaRequestSubmit} className="space-y-4">
@@ -286,7 +286,7 @@ export default function EmbyPage() {
                 <UserPlus className="h-8 w-8 text-arcane-gold" />
                 <div>
                   <h2 className="font-display text-2xl font-bold text-electric-cyan">Request Account Access</h2>
-                  <p className="text-text-secondary text-sm">Don't have an account? Request access to the Emby server.</p>
+                  <p className="text-text-secondary text-sm">Don&apos;t have an account? Request access to the Emby server.</p>
                 </div>
               </div>
               <form onSubmit={handleRegistrationSubmit} className="space-y-4">
@@ -336,7 +336,7 @@ export default function EmbyPage() {
                 </div>
                 <div className="p-4 bg-void rounded border border-electric-cyan/20">
                   <p className="text-text-secondary text-sm">
-                    Requests are typically reviewed within 24-48 hours. You'll receive a confirmation email once your account is approved.
+                    Requests are typically reviewed within 24-48 hours. You&apos;ll receive a confirmation email once your account is approved.
                   </p>
                 </div>
                 <button
@@ -361,33 +361,69 @@ export default function EmbyPage() {
                   <div className="flex items-start gap-3">
                     <Smartphone className="h-6 w-6 text-electric-cyan mt-1" />
                     <div>
-                      <h3 className="font-semibold text-arcane-gold mb-1">Phones</h3>
-                      <p className="text-text-secondary text-sm">{embyData.connectionInstructions.phone}</p>
+                      <h3 className="font-semibold text-arcane-gold mb-1">Mobile (Phones & Tablets)</h3>
+                      <p className="text-text-secondary text-sm mb-2"><strong>Phones:</strong></p>
+                      <p className="text-text-secondary text-sm whitespace-pre-line">{embyData.connectionInstructions.phone}</p>
+                      <p className="text-text-secondary text-sm mb-2 mt-2"><strong>Tablets:</strong></p>
+                      <p className="text-text-secondary text-sm whitespace-pre-line">{embyData.connectionInstructions.tablet}</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Tablet className="h-6 w-6 text-electric-cyan mt-1" />
+                    <Tv className="h-6 w-6 text-electric-cyan mt-1" />
                     <div>
-                      <h3 className="font-semibold text-arcane-gold mb-1">Tablets</h3>
-                      <p className="text-text-secondary text-sm">{embyData.connectionInstructions.tablet}</p>
+                      <h3 className="font-semibold text-arcane-gold mb-1">Smart TVs & Streaming Devices</h3>
+                      <p className="text-text-secondary text-sm mb-2"><strong>Smart TVs:</strong></p>
+                      <p className="text-text-secondary text-sm whitespace-pre-line">{embyData.connectionInstructions.smartTV}</p>
+                      <p className="text-text-secondary text-sm mb-2 mt-2"><strong>Streaming Devices (Roku, Firestick):</strong></p>
+                      <p className="text-text-secondary text-sm whitespace-pre-line">{embyData.connectionInstructions.streamingDevice}</p>
                     </div>
                   </div>
                 </div>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <Tv className="h-6 w-6 text-electric-cyan mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-arcane-gold mb-1">Smart TVs</h3>
-                      <p className="text-text-secondary text-sm">{embyData.connectionInstructions.smartTV}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
                     <Laptop className="h-6 w-6 text-electric-cyan mt-1" />
                     <div>
                       <h3 className="font-semibold text-arcane-gold mb-1">Computers</h3>
-                      <p className="text-text-secondary text-sm">{embyData.connectionInstructions.computer}</p>
+                      <p className="text-text-secondary text-sm whitespace-pre-line">{embyData.connectionInstructions.computer}</p>
                     </div>
                   </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Troubleshooting */}
+            <motion.div
+              className="bg-shadow rounded-lg p-8 border border-electric-cyan/30"
+              variants={fadeInUp}
+            >
+              <h2 className="font-display text-2xl font-bold text-electric-cyan mb-6">Troubleshooting & Help</h2>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="font-semibold text-arcane-gold mb-2">Common Issues & Fixes</h3>
+                  <ul className="text-text-secondary text-sm space-y-1">
+                    {embyData.troubleshooting.commonIssues.map((issue, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <span className="text-electric-cyan">•</span>
+                        {issue}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-arcane-gold mb-2">Advanced Tips</h3>
+                  <ul className="text-text-secondary text-sm space-y-1">
+                    {embyData.troubleshooting.advancedTips.map((tip, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <span className="text-electric-cyan">•</span>
+                        {tip}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="p-4 bg-void rounded border border-electric-cyan/20">
+                  <p className="text-text-secondary text-sm">
+                    <strong className="text-electric-cyan">Need More Help?</strong> {embyData.troubleshooting.contactHelp}
+                  </p>
                 </div>
               </div>
             </motion.div>
